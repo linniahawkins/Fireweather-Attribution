@@ -60,7 +60,7 @@ outdata = np.empty([9,2])
 
 ############ fwi  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'FWI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'FWI_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'fwi_domain_confint_lower.txt')
@@ -70,7 +70,7 @@ outdata[0,1] = calc_region_mean(in_file1,in_file2,ptile)
 
 ############ isi  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'ISI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'ISI_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'isi_domain_confint_lower.txt')
@@ -80,7 +80,7 @@ outdata[1,1]= calc_region_mean(in_file1,in_file2,ptile)
 
 ############ bui  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'BUI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'BUI_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'bui_domain_confint_lower.txt')
@@ -90,7 +90,7 @@ outdata[2,1] = calc_region_mean(in_file1,in_file2,ptile)
 
 ############ hdw  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'HDW_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'HDW_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'hdw_domain_confint_lower.txt')
@@ -100,7 +100,7 @@ outdata[3,1] = calc_region_mean(in_file1,in_file2,ptile)
 
 ############ fosberg  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'FOS_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'FOS_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'fos_domain_confint_lower.txt')
@@ -110,7 +110,7 @@ outdata[4,1] = calc_region_mean(in_file1,in_file2,ptile)
 
 ############ tmax  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'TMAX_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'TMAX_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'tmax_domain_confint_lower.txt')
@@ -120,7 +120,7 @@ outdata[5,1] = calc_region_mean(in_file1,in_file2,ptile)
 
 ############ rh  ##########
 ptile = 5.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'RH_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'RH_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'rh_domain_confint_lower.txt')
@@ -130,7 +130,7 @@ outdata[6,1] = calc_region_mean(in_file1,in_file2,ptile)
 
 ############ vpd  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'VPD_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'VPD_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'vpd_domain_confint_lower.txt')
@@ -140,7 +140,7 @@ outdata[7,1] = calc_region_mean(in_file1,in_file2,ptile)
 
 ############ map windspeed  ##########
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file1 = os.path.join(in_dir+'WIND_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'WIND_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'wind_domain_confint_lower.txt')
@@ -167,7 +167,7 @@ def get_mask(in_file,ptile):
 
 ################# FWI mask #################
 ptile = 95.0
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file = os.path.join(in_dir+'FWI_allsets_b827_domain_byFWI.txt')
 fwi95_mask = get_mask(in_file,ptile)
 
@@ -202,7 +202,7 @@ ffwi95nat_mask = get_mask(in_file,ptile)
 ########## tmax ############
 
 var_diff = np.empty([5,4])
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file = os.path.join(in_dir+'TMAX_allsets_b827_domain_byFWI.txt')
 var = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)
 
@@ -231,7 +231,7 @@ var_diff[4,0] = np.nanmean(var95) - np.nanmean(var95nat)
 
 ############## RH ###############
 
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file = os.path.join(in_dir+'RH_allsets_b827_domain_byFWI.txt')
 var = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)
 
@@ -260,7 +260,7 @@ var_diff[4,1] = np.nanmean(var95) - np.nanmean(var95nat)
 
 ############## vpd ##############
 
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file = os.path.join(in_dir+'VPD_allsets_b827_domain_byFWI.txt')
 var = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)
 
@@ -289,7 +289,7 @@ var_diff[4,2] = np.nanmean(var95) - np.nanmean(var95nat)
 
 ########## windspeed ############
 
-in_dir = '../data/final/'
+in_dir = './data/'
 in_file = os.path.join(in_dir+'WIND_allsets_b827_domain_byFWI.txt')
 var = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)
 
