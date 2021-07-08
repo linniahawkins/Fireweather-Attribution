@@ -225,8 +225,8 @@ def map_ptile(in_file,out_file,ptile,varname,vmin,vmax,cmap):
 	data_ptile = np.reshape(datptile, (116,110))+oceanmask
 
 	#### get lat lon
-	in_dir = '/Users/linniahawkins/Desktop/campfire/'
-	in_file = os.path.join(in_dir+'fwi_max_fwilatlon.txt')
+	in_dir = './data/'
+	in_file = os.path.join(in_dir+'latlon.txt')
 	df = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 	data = df.transpose()
 	lat = data.iloc[:,1].values
