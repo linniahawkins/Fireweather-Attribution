@@ -7,11 +7,6 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt 
 from pyfunctions import *
-#import cartopy.crs as ccrs
-#from cartopy import config
-#import cartopy.feature as cfeature
-
-# readin domain masks
 
 oregon_mask = np.genfromtxt('PSA_oregon_mask.csv',delimiter=',')
 oregon_mask[oregon_mask == 0] = np.nan 
