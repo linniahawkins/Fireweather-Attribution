@@ -12,9 +12,9 @@ from cartopy import config
 import cartopy.feature as cfeature
 from scipy import stats
 
-############ pyfunctions for Hawkins et al., GRL ##########
+############ python functions for Hawkins et al., 2021 GRL ##########
 
-def bootstrap_confint_spatial(em1,em2, ptile, direction="above", c=[5, 95], bsn=1e5):
+def bootstrap_confint(em1,em2, ptile, direction="above", c=[5, 95], bsn=1e5):
     # ptile = percentile 
     # direction = "above" find frequency of occurance above ptile (or below)
     # c = confidence intervals (percentiles) to calculate
@@ -43,7 +43,7 @@ def bootstrap_confint_spatial(em1,em2, ptile, direction="above", c=[5, 95], bsn=
                 ful_occ.append(float(np.count_nonzero(f_data[ij,:] < val[ij])))
         else:
             print 'check direction input'
-        sample_store[:,s] = np.divide(ful_occ,nat_occ)-1
+        sample_store[:,s] = 100*(np.divide(ful_occ,nat_occ)-1)
 
     # now for each confidence interval find the frequency above/below ptile
     spatial_average = np.nanmean(sample_store,0)
@@ -54,7 +54,6 @@ def bootstrap_confint_spatial(em1,em2, ptile, direction="above", c=[5, 95], bsn=
     return conf_inter
 
 ###########################################################
-
 
 def bootstrap_confint_cell(em1,em2, ptile, direction="above", c=[0.05, 0.95], bsn=1e3):
     # ptile = percentile 
@@ -90,7 +89,6 @@ def bootstrap_confint_cell(em1,em2, ptile, direction="above", c=[0.05, 0.95], bs
     high = np.percentile(sample_store, c[1]*100)
     conf_inter = [low,high]
     return conf_inter
-
 
 ###########################################################
 
@@ -133,8 +131,7 @@ def bootstrap_domain(in_file1,in_file2,out_file,ptile,direction):
 
 	np.savetxt(out_file,fwi_confint[:,:,0],delimiter=',',fmt='%1.6f')
 
-
-###########################################################
+#################################################################
 
 def map_ratio(in_file1,in_file2,in_file3,out_file,ptile):
 	# in_file1 : natural forcing simulations
@@ -225,8 +222,8 @@ def map_ptile(in_file,out_file,ptile,varname,vmin,vmax,cmap):
 	data_ptile = np.reshape(datptile, (116,110))+oceanmask
 
 	#### get lat lon
-	in_dir = './data/'
-	in_file = os.path.join(in_dir+'latlon.txt')
+	in_dir = '/Users/linniahawkins/Desktop/campfire/'
+	in_file = os.path.join(in_dir+'fwi_max_fwilatlon.txt')
 	df = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 	data = df.transpose()
 	lat = data.iloc[:,1].values

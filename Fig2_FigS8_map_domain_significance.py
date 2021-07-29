@@ -17,7 +17,7 @@ from pyfunctions import map_ratio, bootstrap_domain
  
 # FWI
 ptile = 95.0
-in_dir = './data/'
+in_dir = '../data/'
 in_file1 = os.path.join(in_dir+'FWI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'FWI_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'fwi_domain_confint_lower.txt')
@@ -26,7 +26,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 # ISI
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'ISI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'ISI_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'isi_domain_confint_lower.txt')
@@ -35,7 +34,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 # BUI
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'BUI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'BUI_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'bui_domain_confint_lower.txt')
@@ -44,7 +42,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 # HDW
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'HDW_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'HDW_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'hdw_domain_confint_lower.txt')
@@ -53,7 +50,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 # Fosberg
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'FOS_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'FOS_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'fos_domain_confint_lower.txt')
@@ -63,7 +59,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 # TMAX
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'TMAX_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'TMAX_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'tmax_domain_confint_lower.txt')
@@ -73,7 +68,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 # RH
 ptile = 5.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'RH_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'RH_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'rh_domain_confint_lower.txt')
@@ -82,7 +76,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"below")
 
 # VPD
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'VPD_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'VPD_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'vpd_domain_confint_lower.txt')
@@ -91,7 +84,6 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 # WIND SPEED
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'WIND_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'WIND_allsets_b827_domain_byFWI.txt')
 out_file = os.path.join(in_dir+'wind_domain_confint_lower.txt')
@@ -105,7 +97,7 @@ bootstrap_domain(in_file1,in_file2,out_file,ptile,"above")
 
 ############ map fwi  ##########
 ptile = 95.0
-in_dir = './data/'
+in_dir = '../data/'
 in_file1 = os.path.join(in_dir+'FWI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'FWI_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'fwi_domain_confint_lower.txt')
@@ -115,7 +107,6 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map isi  ##########
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'ISI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'ISI_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'isi_domain_confint_lower.txt')
@@ -125,7 +116,6 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map bui  ##########
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'BUI_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'BUI_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'bui_domain_confint_lower.txt')
@@ -135,7 +125,6 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map hdw  ##########
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'HDW_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'HDW_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'hdw_domain_confint_lower.txt')
@@ -145,7 +134,6 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map fosberg  ##########
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'FOS_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'FOS_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'fos_domain_confint_lower.txt')
@@ -156,7 +144,6 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map tmax  ##########
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'TMAX_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'TMAX_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'tmax_domain_confint_lower.txt')
@@ -167,7 +154,6 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map rh  ##########
 ptile = 5.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'RH_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'RH_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'rh_domain_confint_lower.txt')
@@ -177,7 +163,6 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map vpd  ##########
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'VPD_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'VPD_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'vpd_domain_confint_lower.txt')
@@ -187,10 +172,10 @@ map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
 
 ############ map windspeed  ##########
 ptile = 95.0
-in_dir = './data/'
 in_file1 = os.path.join(in_dir+'WIND_allsets_b840_domain_byFWI.txt')
 in_file2 = os.path.join(in_dir+'WIND_allsets_b827_domain_byFWI.txt')
 in_file3 = os.path.join(in_dir+'wind_domain_confint_lower.txt')
 out_file = "wind_domain_bootstrap_significance_4.png"
 
 map_ratio(in_file1,in_file2,in_file3,out_file,ptile)
+

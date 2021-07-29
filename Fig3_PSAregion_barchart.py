@@ -2,15 +2,14 @@
 
 import sys
 import os, glob
-from netCDF4 import Dataset
 import numpy as np 
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt 
-import cartopy.crs as ccrs
-from cartopy import config
-import cartopy.feature as cfeature
-from scipy import stats
+from pyfunctions import *
+#import cartopy.crs as ccrs
+#from cartopy import config
+#import cartopy.feature as cfeature
 
 # readin domain masks
 
@@ -37,49 +36,11 @@ malibu_cells = np.argwhere(tmp2>0).flatten()
 
 ptile = 95.0
 
-def bootstrap_confint(em1,em2, ptile, direction="above", c=[5, 95], bsn=1e5):
-    # ptile = percentile 
-    # direction = "above" find frequency of occurance above ptile (or below)
-    # c = confidence intervals (percentiles) to calculate
-    # bsn = boot strap number, number of times to resample the distribution
-    nat_data = em1 # 9x2000
-    ful_data = em2
-    # create the store
-    sample_store = np.zeros((nat_data.shape[0],int(bsn)), 'f')
-    # define sample size
-    ssize = nat_data.shape[1]
-    # do the resampling
-    for s in range(0, int(bsn)):
-        x1 = np.random.uniform(0,nat_data.shape[1],ssize).astype(int)
-        x2 = np.random.uniform(0,nat_data.shape[1],ssize).astype(int)
-        n_data = nat_data[:,x1]
-        f_data = ful_data[:,x2]
-        val = np.percentile(n_data,ptile,axis=1)
-        nat_occ = []; ful_occ = [];
-        if direction == "above":
-            for ij in range(len(val)):
-                nat_occ.append(float(np.count_nonzero(n_data[ij,:] > val[ij])))
-                ful_occ.append(float(np.count_nonzero(f_data[ij,:] > val[ij])))
-        elif direction == "below":
-            for ij in range(len(val)):
-                nat_occ.append(float(np.count_nonzero(n_data[ij,:] < val[ij])))
-                ful_occ.append(float(np.count_nonzero(f_data[ij,:] < val[ij])))
-        else:
-            print 'check direction input'
-        sample_store[:,s] = 100*(np.divide(ful_occ,nat_occ)-1)
-
-    # now for each confidence interval find the frequency above/below ptile
-    spatial_average = np.nanmean(sample_store,0)
-    low = np.percentile(spatial_average, c[0],0)
-    high = np.percentile(spatial_average, c[1],0)
-    conf_inter = [low,high]
-    
-    return conf_inter
 
 ####################################
 # readin fwi data
 ####################################
-in_dir = './data/'
+in_dir = '../data/'
 in_file = os.path.join(in_dir+'FWI_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -114,7 +75,6 @@ fwi_malibu_confint = bootstrap_confint(FWI_malibu_nat,FWI_malibu_ful,ptile,direc
 ####################################
 # readin isi data
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'ISI_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -149,7 +109,6 @@ isi_malibu_confint = bootstrap_confint(ISI_malibu_nat,ISI_malibu_ful,ptile,direc
 ####################################
 # readin bui counts
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'BUI_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -184,7 +143,6 @@ bui_malibu_confint = bootstrap_confint(BUI_malibu_nat,BUI_malibu_ful,ptile,direc
 ####################################
 # readin HDW counts
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'HDW_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -219,7 +177,6 @@ hdw_malibu_confint = bootstrap_confint(HDW_malibu_nat,HDW_malibu_ful,ptile,direc
 ####################################
 # readin Fosberg counts
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'FOS_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -255,7 +212,6 @@ fos_malibu_confint = bootstrap_confint(FOS_malibu_nat,FOS_malibu_ful,ptile,direc
 ####################################
 # readin Tmax counts
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'TMAX_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -290,7 +246,6 @@ tmax_malibu_confint = bootstrap_confint(TMAX_malibu_nat,TMAX_malibu_ful,ptile,di
 ####################################
 # readin RH counts
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'RH_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -327,7 +282,6 @@ rh_malibu_confint = bootstrap_confint(RH_malibu_nat,RH_malibu_ful,100-ptile,dire
 ####################################
 # readin VPD counts
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'VPD_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -363,7 +317,6 @@ vpd_malibu_confint = bootstrap_confint(VPD_malibu_nat,VPD_malibu_ful,ptile,direc
 ####################################
 # readin wind counts
 ####################################
-in_dir = './data/'
 in_file = os.path.join(in_dir+'WIND_allsets_b840_domain_byFWI.txt')
 data = pd.read_csv(in_file,index_col=None,header=None, sep=' ',parse_dates=True, squeeze=True)                          
 natdata = data.values
@@ -395,7 +348,7 @@ ws_paradise_confint = bootstrap_confint(WS_paradise_nat,WS_paradise_ful,ptile,di
 ws_oregon_confint = bootstrap_confint(WS_oregon_nat,WS_oregon_ful,ptile,direction="above")
 ws_malibu_confint = bootstrap_confint(WS_malibu_nat,WS_malibu_ful,ptile,direction="above")
 
-####### Bar charts ###########################
+####### Bar chart Tubbs ###########################
 plt.style.use('seaborn-deep')
 
 lower_idx = [e2-e1 for (e1, e2) in zip([fwi_tubbs_confint[0],isi_tubbs_confint[0],bui_tubbs_confint[0],hdw_tubbs_confint[0],fos_tubbs_confint[0]],[FWI_tubbs,ISI_tubbs,BUI_tubbs,HDW_tubbs,FOS_tubbs])]
@@ -422,13 +375,13 @@ ax2.set_yticklabels(['1/20','1/15','1/10'])
 
 plt.xticks([1,2,3,4,5,6,7,8,9],['FWI','ISI','BUI','HDW','FFWI','TA','VPD','RH','WS'])
 
-plt.title('Mid coast to Mendocino (CA)',fontsize=24)
+plt.title('Tubbs Fire',fontsize=24)
 plt.box(False)
 
-plotname = 'MidCoastCA_barchart_PSAmean_deltaFrequency'
+plotname = 'Tubbs_barchart_PSAmean_deltaFrequency'
 plt.savefig(plotname, dpi=300)
 
-####### Bar charts ###########################
+####### Bar chart Paradise ###########################
 plt.style.use('seaborn-deep')
 
 lower_idx = [e2-e1 for (e1, e2) in zip([fwi_paradise_confint[0],isi_paradise_confint[0],bui_paradise_confint[0],hdw_paradise_confint[0],fos_paradise_confint[0]],[FWI_paradise,ISI_paradise,BUI_paradise,HDW_paradise,FOS_paradise])]
@@ -455,13 +408,13 @@ ax2.set_yticklabels(['1/20','1/15','1/10'])
 
 plt.xticks([1,2,3,4,5,6,7,8,9],['FWI','ISI','BUI','HDW','FFWI','TA','VPD','RH','WS'])
 
-plt.title('Northern Sierras (CA)',fontsize=24)
+plt.title('Paradise Fire',fontsize=24)
 plt.box(False)
 
-plotname = 'NSierras_barchart_PSAmean_deltaFrequency'
+plotname = 'Paradise_barchart_PSAmean_deltaFrequency'
 plt.savefig(plotname, dpi=300)
 
-####### Bar charts ###########################
+####### Bar chart Oregon ###########################
 plt.style.use('seaborn-deep')
 
 lower_idx = [e2-e1 for (e1, e2) in zip([fwi_oregon_confint[0],isi_oregon_confint[0],bui_oregon_confint[0],hdw_oregon_confint[0],fos_oregon_confint[0]],[FWI_oregon,ISI_oregon,BUI_oregon,HDW_oregon,FOS_oregon])]
@@ -488,13 +441,13 @@ ax2.set_yticklabels(['1/20','1/15','1/10'])
 
 plt.xticks([1,2,3,4,5,6,7,8,9],['FWI','ISI','BUI','HDW','FFWI','TA','VPD','RH','WS'])
 
-plt.title('Central Western Oregon',fontsize=24)
+plt.title('Oregon Fire',fontsize=24)
 plt.box(False)
 
 plotname = 'Oregon_barchart_PSAmean_deltaFrequency'
 plt.savefig(plotname, dpi=300)
 
-####### Bar charts ###########################
+####### Bar chart southern CA ###########################
 plt.style.use('seaborn-deep')
 
 lower_idx = [e2-e1 for (e1, e2) in zip([fwi_malibu_confint[0],isi_malibu_confint[0],bui_malibu_confint[0],hdw_malibu_confint[0],fos_malibu_confint[0]],[FWI_malibu,ISI_malibu,BUI_malibu,HDW_malibu,FOS_malibu])]
@@ -520,11 +473,9 @@ ax2.set_yticks([0.0,0.3333,1])
 ax2.set_yticklabels(['1/20','1/15','1/10'])
 
 plt.xticks([1,2,3,4,5,6,7,8,9],['FWI','ISI','BUI','HDW','FFWI','TA','VPD','RH','WS'])
-
-plt.title('South Coast (CA)',fontsize=24)
 plt.box(False)
 
-plotname = 'SouthCoast_barchart_PSAmean_deltaFrequency'
+plotname = 'Malibu_barchart_PSAmean_deltaFrequency'
 plt.savefig(plotname, dpi=300)
 
 plt.show()
